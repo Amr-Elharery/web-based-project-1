@@ -2,7 +2,7 @@
 
 ## Created by: 
   - Amr Tamer Samy
-  - 
+  -
 
 ## Technologies used:
   > PHP \
