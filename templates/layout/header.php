@@ -20,19 +20,19 @@
                         <button onclick="toggleNav()">Close</button>
                     </li>
                     <li class="nav p-10 nav-link">
-                        <a href="#">About</a>
+                        <a href="#">Home</a>
                     </li>
                     <li class="nav p-10 nav-link">
-                        <a href="#">Skills</a>
+                        <a href="#">-----</a>
                     </li>
                     <li class="nav p-10 nav-link">
-                        <a href="#">Works</a>
+                        <a href="#">-----</a>
                     </li>
                     <li class="nav p-10 nav-link">
-                        <a href="#">Resume</a>
+                        <a href="#">------</a>
                     </li>
                     <li class="nav p-10 nav-link">
-                        <a href="#">Contacts</a>
+                        <a href="#">------</a>
                     </li>
                 </ul>
             </div>
