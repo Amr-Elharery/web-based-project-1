@@ -1,35 +1,26 @@
-nav {
-    color: #fe6e0e;
-    height: min-content;
+/* Root Variables */
+:root {
+    --primary-color: #0075ff ;
+    --primary-alt-color: #0d69d5;
+    --grey : #888;
+    --border-color: #ddd;
+    --border-invalid-color: #f00;
+    --border-valid-color: #51cf66;
+    --primary-radius: 6px;
+    --primary-transition: 0.3s;
 }
 
-.nav-link {
-    color: #fe6e0e;
-    transition: color 0.3s ease, border-bottom 0.6s ease;
-    border-bottom: 2px solid transparent;
+header{
+    background-color: var(--border-color);
 }
 
-.nav-link:hover {
-    color: #cb5c12;
-    border-bottom: 2px solid #cb5c12;
-    text-decoration: none;
+.nav-link{
+    color: var(--primary-color);
+    transition: color 0.3s ease;
 }
-
-ul{
-    text-decoration: none;
+.nav-link:hover{
+    color: var(--primary-alt-color);
 }
-
-nav a{
-    color: #fe6e0e;
-}
-
-
-.nav-link a:hover{
-    color: #cb5c12;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-
 
 .nav-toggle {
     position: absolute;

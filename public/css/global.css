@@ -2,8 +2,12 @@
 
 /* Root Variables */
 :root {
-  --primary-color: #fe6e0e;
-  --primary-alt-color: #cb5c12;
+  --primary-color: #0075ff ;
+  --primary-alt-color: #0d69d5;
+  --grey : #888;
+  --border-color: #ddd;
+  --border-invalid-color: #f00;
+  --border-valid-color: #51cf66;
   --primary-radius: 6px;
   --primary-transition: 0.3s;
 }
@@ -56,19 +60,39 @@ button,
 textarea {
   border: none;
   outline: none;
+  resize: none;
 }
-
+.form-group {
+  margin-bottom: 13px;
+}
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 18;
+  border: 1px solid var(--border-color);
+  border-radius: var(--primary-radius);
+  box-sizing: border-box;
+}
+input.invalid {
+  border-color: var(--border-invalid-color);
+}
+input.valid {
+  border-color: var(--border-valid-color);
+}
 /* Assistive classes */
 .c-primary {
   color: var(--primary-color);
+}
+.c-grey {
+  color: var(--grey);
 }
 
 .bg-primary {
   background-color: var(--primary-color);
 }
 
-.btn-shape {
-  padding: 8px 20px;
+.btn {
+  padding: 5px 12px;
   border-radius: var(--primary-radius);
   -webkit-border-radius: var(--primary-radius);
   -moz-border-radius: var(--primary-radius);
@@ -109,6 +133,10 @@ textarea {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-1{
+  flex: 1;
 }
 
 .justify-center {
@@ -177,6 +205,13 @@ textarea {
 }
 .bold {
   font-weight: bold;
+}
+
+.fs-14{
+  font-size: 14px;
+}
+.fs-22{
+  font-size: 22px;
 }
 
 .show-mobile {
