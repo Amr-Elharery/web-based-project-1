@@ -188,7 +188,9 @@ input.valid {
 .c-white {
   color: #fff;
 }
-
+.c-red {
+  color: #f00;
+}
 .p-5 {
   padding: 5px;
 }
