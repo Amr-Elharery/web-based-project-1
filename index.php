@@ -12,6 +12,9 @@
   <title>Signup</title>
 </head>
 <body>
+    <?php require __DIR__ . '/src/database.php';
+      echo "<script>alert('DB connected successfully')</script>"; // Test connection
+    ?>
   <?php include __DIR__ . '/templates/layout/header.php'; ?>
   <?php include __DIR__ . '/templates/sign-up.php'; ?>
   <?php include __DIR__ . '/templates/layout/footer.php'; ?>
