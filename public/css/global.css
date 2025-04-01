@@ -1,0 +1,266 @@
+/*Start Global Rules*/
+
+/* Root Variables */
+:root {
+  --primary-color: #0075ff;
+  --primary-alt-color: #0d69d5;
+  --grey: #888;
+  --border-color: #ddd;
+  --border-invalid-color: #f00;
+  --border-valid-color: #51cf66;
+  --primary-radius: 6px;
+  --primary-transition: 0.3s;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: var(--primary-radius);
+  background-color: var(--primary-color);
+  -webkit-border-radius: var(--primary-radius);
+  -moz-border-radius: var(--primary-radius);
+  -ms-border-radius: var(--primary-radius);
+  -o-border-radius: var(--primary-radius);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+input,
+button,
+textarea {
+  border: none;
+  outline: none;
+  resize: none;
+}
+.form-group {
+  margin-bottom: 13px;
+}
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+  box-sizing: border-box;
+}
+input.invalid {
+  border-color: var(--border-invalid-color);
+}
+input.valid {
+  border-color: var(--border-valid-color);
+}
+/* Assistive classes */
+.c-primary {
+  color: var(--primary-color);
+}
+.c-grey {
+  color: var(--grey);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.btn {
+  padding: 5px 12px;
+  border-radius: var(--primary-radius);
+  -webkit-border-radius: var(--primary-radius);
+  -moz-border-radius: var(--primary-radius);
+  -ms-border-radius: var(--primary-radius);
+  -o-border-radius: var(--primary-radius);
+}
+@media (width < 767px) {
+  .btn-shape {
+    padding: 8px;
+  }
+}
+
+.btn-effect {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  transition: var(--primary-transition);
+  -webkit-transition: var(--primary-transition);
+  -moz-transition: var(--primary-transition);
+  -ms-transition: var(--primary-transition);
+  -o-transition: var(--primary-transition);
+}
+.btn-effect:hover {
+  background-color: var(--primary-alt-color);
+}
+
+.flex {
+  display: flex;
+  gap: 5px;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+@media (width < 767px) {
+  .flex-col-mobile {
+    flex-direction: column;
+  }
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.rad-full {
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.rad-6 {
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+.rad-16 {
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+}
+
+.w-fit {
+  width: fit-content;
+}
+.w-full {
+  width: 100%;
+}
+
+.shadow {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.bg-white {
+  background-color: #fff;
+}
+.c-white {
+  color: #fff;
+}
+.c-red {
+  color: #f00;
+}
+.p-5 {
+  padding: 5px;
+}
+
+.p-10 {
+  padding: 10px;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.border-primary {
+  border: 1px solid var(--primary-color);
+}
+
+.border-black {
+  border: 1px solid;
+}
+.bold {
+  font-weight: bold;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+.fs-22 {
+  font-size: 22px;
+}
+
+.show-mobile {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (width < 767px) {
+  .show-mobile {
+    display: block;
+  }
+  .hide-mobile {
+    display: none;
+  }
+}
+
+.container {
+  padding-inline: 15px;
+  margin-inline: auto;
+}
+
+/* Screens */
+
+/* Small */
+@media (width > 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (width > 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (width > 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/*End Global Rules*/

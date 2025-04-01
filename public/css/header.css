@@ -1,0 +1,83 @@
+/* Root Variables */
+:root {
+  --primary-color: #0075ff;
+  --primary-alt-color: #0d69d5;
+  --grey: #888;
+  --border-color: #ddd;
+  --border-invalid-color: #f00;
+  --border-valid-color: #51cf66;
+  --primary-radius: 6px;
+  --primary-transition: 0.3s;
+}
+
+header {
+  background-color: var(--border-color);
+  padding: 10px 0;
+}
+
+.nav-link a {
+  transition: var(--primary-transition);
+}
+.nav-link:hover a {
+  color: var(--primary-alt-color);
+}
+
+.nav-toggle {
+  display: none;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--primary-radius);
+}
+
+.nav-toggle:focus {
+  outline: none;
+}
+
+.nav-list-ul {
+  display: flex;
+  gap: 10px;
+}
+
+.close-btn {
+  display: none;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.close-btn button:hover {
+  background-color: var(--primary-alt-color);
+}
+
+@media (max-width: 768px) {
+  .close-btn {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-list-ul {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 250px;
+    padding: 20px;
+    transition: left 0.8s ease;
+    z-index: 1000;
+  }
+
+  .nav-link a {
+    color: #fff;
+  }
+
+  .nav-list-ul.show {
+    left: 0;
+  }
+}
