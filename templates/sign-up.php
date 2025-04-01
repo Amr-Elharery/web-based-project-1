@@ -2,7 +2,7 @@
   <form id="registrationForm" class="signup-form shadow rad-6">
     
       <h1>Create Account</h1>
-        <div class="flex">
+        <div class="flex flex-col-mobile">
           <div class="form-group flex-1">
               <label for="full_name">Full Name: </label>
               <input class="form-control" type="text" id="full_name" name="full_name" placeholder="Enter your full name" title="Full name should contain only letters and spaces">
@@ -22,7 +22,7 @@
             <span class="error-message fs-14" id="user_name_error"></span>
         </div>
 
-        <div class="flex">
+        <div class="flex flex-col-mobile">
           <div class="form-group flex-1">
               <label for="phone">Phone Number: </label>
               <input class="form-control" type="tel" id="phone" name="phone" placeholder="Enter your phone number" 

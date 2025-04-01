@@ -2,9 +2,9 @@
 
 /* Root Variables */
 :root {
-  --primary-color: #0075ff ;
+  --primary-color: #0075ff;
   --primary-alt-color: #0d69d5;
-  --grey : #888;
+  --grey: #888;
   --border-color: #ddd;
   --border-invalid-color: #f00;
   --border-valid-color: #51cf66;
@@ -134,8 +134,13 @@ input.valid {
 .flex-col {
   flex-direction: column;
 }
+@media (width < 767px) {
+  .flex-col-mobile {
+    flex-direction: column;
+  }
+}
 
-.flex-1{
+.flex-1 {
   flex: 1;
 }
 
@@ -207,10 +212,10 @@ input.valid {
   font-weight: bold;
 }
 
-.fs-14{
+.fs-14 {
   font-size: 14px;
 }
-.fs-22{
+.fs-22 {
   font-size: 22px;
 }
 
