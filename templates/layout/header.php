@@ -3,7 +3,9 @@
     <div class="container flex flex-between items-center">
         <a class="logo" href="#"><i class="fa-solid fa-a fa-2xl"></i></a>
 
-        <button class="btn btn-effect nav-toggle" onclick="toggleNav()">Menu</button>
+        <button class="btn btn-effect nav-toggle" onclick="toggleNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
 
         <ul class="nav-list-ul">
             <li class="close-btn">
