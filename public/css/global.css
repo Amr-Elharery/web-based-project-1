@@ -35,6 +35,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #333;
 }
 
 code {
@@ -68,9 +69,7 @@ textarea {
 .form-control {
   width: 100%;
   padding: 10px;
-  font-size: 18;
-  border: 1px solid var(--border-color);
-  border-radius: var(--primary-radius);
+  border-bottom: 1px solid var(--border-color);
   box-sizing: border-box;
 }
 input.invalid {
