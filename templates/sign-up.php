@@ -1,5 +1,27 @@
+
+<?php
+session_start();
+// Include the PHP file with the registration function
+include_once 'user.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Call the registerUser function to handle the registration
+    registerUser();
+}
+?>
+
+<?php
+// Display any session messages (for success or failure)
+if (isset($_SESSION['message'])) {
+    echo '<div class="alert ' . ($_SESSION['status'] === 'success' ? 'alert-success' : 'alert-error') . '">'
+         . $_SESSION['message'] . '</div>';
+    unset($_SESSION['message']);
+    unset($_SESSION['status']);
+}
+?>
+   
 <div class="container">
-  <form id="registrationForm" class="signup-form shadow rad-6">
+  <form id="registrationForm" class="signup-form shadow rad-6" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method = "POST">
     
       <h1>Create Account</h1>
         <div class="flex flex-col-mobile">
