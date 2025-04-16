@@ -1,12 +1,12 @@
 <?php
-// filepath: c:\xampp\htdocs\GLOPAL project\templates\sign-up.php
 
-require __DIR__ . '/../src/database.php'; // الاتصال بقاعدة البيانات
 
-$errors = []; // مصفوفة لتخزين الأخطاء
+require __DIR__ . '/../src/database.php'; 
+
+$errors = []; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // استلام البيانات من الفورم
+
     $fullName = trim($_POST['full_name'] ?? '');
     $userName = trim($_POST['user_name'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -17,61 +17,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirmPassword = $_POST['confirm_password'] ?? '';
     $userImage = $_FILES['user_image'] ?? null;
 
-    // التحقق من صحة البيانات
-
-    // التحقق من الاسم الكامل
     if (empty($fullName)) {
         $errors[] = 'Full Name is required.';
     } elseif (!preg_match('/^[a-zA-Z\s]+$/', $fullName)) {
         $errors[] = 'Full Name should contain only letters and spaces.';
     }
 
-    // التحقق من اسم المستخدم
     if (empty($userName)) {
         $errors[] = 'Username is required.';
     } elseif (strlen($userName) < 4 || strlen($userName) > 20) {
         $errors[] = 'Username must be between 4 and 20 characters.';
     }
 
-    // التحقق من البريد الإلكتروني
     if (empty($email)) {
         $errors[] = 'Email is required.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Invalid email format.';
     }
 
-    // التحقق من رقم الهاتف
     if (empty($phone)) {
         $errors[] = 'Phone number is required.';
     } elseif (!preg_match('/^[0-9]{10,15}$/', $phone)) {
         $errors[] = 'Phone number must be between 10 and 15 digits.';
     }
 
-    // التحقق من رقم الواتساب
     if (empty($whatsapp)) {
         $errors[] = 'WhatsApp number is required.';
     } elseif (!preg_match('/^[0-9]{10,15}$/', $whatsapp)) {
         $errors[] = 'WhatsApp number must be between 10 and 15 digits.';
     }
 
-    // التحقق من العنوان
     if (empty($address)) {
         $errors[] = 'Address is required.';
     }
 
-    // التحقق من كلمة المرور
     if (empty($password)) {
         $errors[] = 'Password is required.';
     } elseif (strlen($password) < 8 || !preg_match('/[0-9]/', $password) || !preg_match('/[\W]/', $password)) {
         $errors[] = 'Password must be at least 8 characters long and contain at least one number and one special character.';
     }
 
-    // التحقق من تطابق كلمة المرور
     if ($password !== $confirmPassword) {
         $errors[] = 'Passwords do not match.';
     }
 
-    // التحقق من الصورة الشخصية
     if ($userImage && $userImage['error'] === UPLOAD_ERR_OK) {
         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!in_array($userImage['type'], $allowedTypes)) {
@@ -81,16 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Profile picture is required.';
     }
 
-    // إذا لم تكن هناك أخطاء، قم بحفظ البيانات
     if (empty($errors)) {
-        // تشفير كلمة المرور
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // حفظ الصورة الشخصية
         $imagePath = '/uploads/' . basename($userImage['name']);
         move_uploaded_file($userImage['tmp_name'], __DIR__ . '/../public' . $imagePath);
 
-        // إدخال البيانات في قاعدة البيانات
         $stmt = $pdo->prepare('INSERT INTO users (full_name, user_name, email, phone, whatsapp, address, password, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         if ($stmt->execute([$fullName, $userName, $email, $phone, $whatsapp, $address, $hashedPassword, $imagePath])) {
             $successMessage = 'Registration successful!';
