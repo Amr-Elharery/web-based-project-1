@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="email">Email<span class="c-red fs-14">*</span> : </label>
             <input class="form-control" type="email" id="email" name="email" placeholder="Enter your email" >
-            <span class="error-message fs-14" id="user_name_error"></span>
+            <span class="error-message fs-14" id="email_error"></span>
         </div>
 
         <div class="flex flex-col-mobile">
@@ -70,6 +70,8 @@
 
         <div class="form-group">
             <button class="btn btn-effect c-white w-full fs-22" type="submit">Register</button>
+            <span class="error-message fs-14" id="form_error"></span>
+
         </div>
     </form>
 </div>
