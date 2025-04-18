@@ -1,4 +1,4 @@
-import { env } from '/config/env.js';
+import { env } from '/config/env.dev.js';
 
 let isFullNameValid = false;
 let isUserNameValid = false;

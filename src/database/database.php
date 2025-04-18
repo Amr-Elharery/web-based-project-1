@@ -3,7 +3,7 @@ class Database {
   private static $connection = null;
 
   private function __construct() {
-    $config = require_once __DIR__ . "/../../config/config.php";
+    $config = require_once __DIR__ . "/../../config/config.dev.php";
     self::$connection = new mysqli($config['host'], $config['user'], $config['password'], $config['database']);
 
     if (self::$connection->connect_error) {
