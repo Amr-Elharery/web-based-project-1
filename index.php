@@ -13,6 +13,7 @@
 </head>
 <body>
     <?php require __DIR__ . '/src/database.php';
+      $connection = Database::getInstance();
       echo "<script>console.log('Connected successfully to DB server')</script>"; // Test connection
     ?>
   <?php include __DIR__ . '/templates/layout/header.php'; ?>

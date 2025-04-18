@@ -1,0 +1,19 @@
+{
+  "name": "user-registration-webpage",
+  "version": "1.0.0",
+  "description": "- Amr Tamer Samy\r   -",
+  "scripts": {
+    "start": "php -S localhost:8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amr-Elharery/web-based-project-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amr-Elharery/web-based-project-1/issues"
+  },
+  "homepage": "https://github.com/Amr-Elharery/web-based-project-1#readme"
+}

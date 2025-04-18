@@ -1,9 +1,21 @@
 <?php
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+class Database {
+  private static $connection = null;
 
-$config = require_once __DIR__ . '/../config/config.php';
+  private function __construct() {
+    $config = require_once __DIR__ . "/../config/config.php";
+    self::$connection = new mysqli($config['host'], $config['user'], $config['password'], $config['database']);
 
-$conn = new mysqli($config['host'], $config['user'], $config['password'], $config['database']);
-$conn->set_charset("utf8mb4");
+    if (self::$connection->connect_error) {
+      die("Connection failed: " . self::$connection->connect_error);
+    }
+  }
 
-return $conn;
+  public static function getInstance() {
+    if (self::$connection === null) {
+      new Database();
+    }
+    return self::$connection;
+  }
+}
+?>
