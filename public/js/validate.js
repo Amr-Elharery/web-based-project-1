@@ -307,9 +307,20 @@ document.getElementById("registrationForm").addEventListener("submit", function 
             if (result == 'success') {
                 form_error.textContent = "Registration successful!";
                 form_error.style.color = "green";
+                Swal.fire({
+                    title: "Registration successful!",
+                    icon: "success",
+                    draggable: true
+                });
             } else {
                 form_error.textContent = "Registration failed! Please try again.<br>" + result;
                 form_error.style.color = "red";
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Registration failed! Please try again.",
+                    footer: '<a href="/">Register again?</a>'
+                });
             }
         })
     }else{

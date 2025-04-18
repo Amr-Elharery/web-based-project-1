@@ -22,5 +22,6 @@
 
   <script src="./public/js/header.js"></script>
   <script src="./public/js/validate.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
