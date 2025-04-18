@@ -1,6 +1,7 @@
 import { env } from '/config/env.js';
 
 let formValid = false;
+let limit_exceeded = false; // Flag to track if API limit is exceeded
 
 async function userNameValidation(username) {
     const url = "/src/validation/checkUserName.php";
@@ -43,7 +44,8 @@ async function whatsappValidation(whatsapp) {
         }
         else{
             console.error('Error:', result);
-            return true; // TODO handle this case properly
+            limit_exceeded = true;
+            return false;
         }
     } catch (error) {
         console.error('Error:', error);
@@ -192,9 +194,15 @@ document.getElementById("whatsapp").addEventListener("blur", function () {
     }
     whatsappValidation(whatsapp).then(isValid => {
         if (!isValid) {
-            whatsapp_error.textContent = "invalid whatsapp number";
-            whatsapp_error.style.color = "red";
-            formValid = false;
+            if(limit_exceeded){
+                whatsapp_error.textContent = "API calls limit exceeded, please try again later";
+                whatsapp_error.style.color = "red";
+                formValid = true; // Allow form submission if limit exceeded
+            }else{
+                whatsapp_error.textContent = "invalid whatsapp number";
+                whatsapp_error.style.color = "red";
+                formValid = false;
+            }
         } else {
             whatsapp_error.textContent = "valid whatsapp number";
             whatsapp_error.style.color = "green";
