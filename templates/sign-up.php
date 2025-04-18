@@ -99,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php elseif (!empty($successMessage)): ?>
             <p style="color: green;"><?php echo htmlspecialchars($successMessage); ?></p>
         <?php endif; ?>
-
+    
         <div class="flex flex-col-mobile">
             <div class="form-group flex-1">
                 <label for="full_name">Full Name<span class="c-red fs-14">*</span> : </label>

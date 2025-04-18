@@ -11,3 +11,19 @@
 .password-requirements {
   margin-top: 5px;
 }
+.alert-success {
+  text-align: center;
+  background-color: #e6ffe6;
+  color: green;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+.alert-error {
+  text-align: center;
+  background-color: #ffe6e6;
+  color: red;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
