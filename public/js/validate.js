@@ -1,3 +1,35 @@
+import { env } from '/config/env.js';
+
+async function whatsappValidation(whatsapp) {
+    const url = env.API_URL;
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'x-rapidapi-key': env['x-rapidapi-key'],
+            'x-rapidapi-host': env['x-rapidapi-host'],
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            phone_number: '+2' + whatsapp,
+        })
+    };
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        if(response.status === 200 && result.status === 'valid'){
+            return true;
+        }
+        else if(response.status === 200 && result.status === 'invalid'){
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+}
+
+
 document.getElementById("full_name").addEventListener("blur", function () {
     const full_name = document.getElementById("full_name").value;
     const full_name_error = document.getElementById("full_name_error");
@@ -53,6 +85,24 @@ document.getElementById("whatsapp").addEventListener("blur", function () {
 
     if (!whatsapp) {
         whatsapp_error.textContent = "please write your whatsapp number";
+    }
+    else if (whatsapp.length < 11) {
+        whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
+        whatsapp_error.style.color = "red"
+    }
+    else if(/[0-9]{10,15}/.test(whatsapp)) {
+        whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
+        whatsapp_error.style.color = "red"
+    }
+    else {
+        whatsappValidation(whatsapp).then(isValid => {
+            if (!isValid) {
+                whatsapp_error.textContent = "invalid whatsapp number";
+            } else {
+                whatsapp_error.textContent = "valid whatsapp number";
+                whatsapp_error.style.color = "green"
+            }
+        });
     }
 })
 

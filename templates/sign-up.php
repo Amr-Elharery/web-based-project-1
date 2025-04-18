@@ -32,7 +32,7 @@
 
           <div class="form-group flex-1">
               <label for="whatsapp">WhatsApp Number<span class="c-red fs-14">*</span> : </label>
-              <input class="form-control" type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your WhatsApp number"
+              <input class="form-control" type="tel" id="whatsapp" name="whatsapp" placeholder="0123456789" 
                     pattern="[0-9]{10,15}">
                 <span class="error-message fs-14" id="whatsapp_error"></span>
           </div>

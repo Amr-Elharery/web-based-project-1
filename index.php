@@ -21,6 +21,6 @@
   <?php include __DIR__ . '/templates/layout/footer.php'; ?>
 
   <script src="./public/js/header.js"></script>
-  <script src="./public/js/validate.js"></script>
+  <script src="./public/js/validate.js" type="module"></script>
 </body>
 </html>
