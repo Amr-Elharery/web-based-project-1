@@ -12,7 +12,7 @@
   <title>Signup</title>
 </head>
 <body>
-    <?php require __DIR__ . '/src/database.php';
+    <?php require __DIR__ . '/src/database/database.php';
       $connection = Database::getInstance();
       echo "<script>console.log('Connected successfully to DB server')</script>"; // Test connection
     ?>
