@@ -86,18 +86,19 @@ document.getElementById("whatsapp").addEventListener("blur", function () {
     if (!whatsapp) {
         whatsapp_error.textContent = "please write your whatsapp number";
     }
-    else if (whatsapp.length < 11) {
+    if (whatsapp.length < 11) {
         whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
         whatsapp_error.style.color = "red"
     }
-    else if(/[0-9]{10,15}/.test(whatsapp)) {
+    if(/[0-9]{10,15}/.test(whatsapp)) {
         whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
         whatsapp_error.style.color = "red"
     }
-    else {
+    if (whatsapp.length === 11 && /[0-9]{10,15}/.test(whatsapp)) {
         whatsappValidation(whatsapp).then(isValid => {
             if (!isValid) {
                 whatsapp_error.textContent = "invalid whatsapp number";
+                whatsapp_error.style.color = "red"
             } else {
                 whatsapp_error.textContent = "valid whatsapp number";
                 whatsapp_error.style.color = "green"
