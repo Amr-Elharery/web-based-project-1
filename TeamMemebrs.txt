@@ -4,11 +4,8 @@ Prepared for Eng. Ahmed Abd-Elaziz
 
 Team Members for User-Registration-Webpage Phase-1:
 
-<<<<<<< HEAD
   git repository for version control: https://github.com/Amr-Elharery/web-based-project-1
 
-=======
->>>>>>> 133040aa5a6f12c1188bad38faaeedbfd99fd02f
   Team number: 44
 
   - Amr Tamer Samy                | 20220237 | amrelharery@gmail.com
