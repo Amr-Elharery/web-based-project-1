@@ -10,6 +10,8 @@ let isPasswordValid = false;
 let isImageValid = false;
 let limit_exceeded = false;
 
+
+// ASYNC FUNCTIONS
 async function userNameValidation(username) {
     const url = "/src/validation/checkUserName.php";
     try {
@@ -78,6 +80,32 @@ async function submitForm(full_name, user_name, email, phone, whatsapp, address,
         return false;
     }
 }
+
+
+function resetForm() {
+    document.getElementById("registrationForm").reset();
+
+    const errorFields = [
+        "full_name_error", "user_name_error", "email_error", "phone_error", "whatsapp_error",
+        "address_error", "password_error", "confirm_password_error", "user_image_error", "form_error"
+    ];
+
+    errorFields.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.textContent = "";
+    });
+
+    // Reset flags
+    isFullNameValid = false;
+    isUserNameValid = false;
+    isEmailValid = false;
+    isPhoneValid = false;
+    isWhatsappValid = false;
+    isAddressValid = false;
+    isPasswordValid = false;
+    isImageValid = false;
+}
+
 
 // VALIDATION EVENTS
 
@@ -294,6 +322,8 @@ document.getElementById("registrationForm").addEventListener("submit", function 
                     Swal.fire({
                         title: "Registration successful!",
                         icon: "success"
+                    }).then(()=>{
+                        resetForm();
                     });
                 } else {
                     form_error.textContent = "Registration failed! " + result;
