@@ -1,5 +1,21 @@
 import { env } from '/config/env.js';
 
+async function userNameValidation(username) {
+    const url = "/src/validation/checkUserName.php";
+    try{
+        const response = await fetch(url + "?username=" + username);
+        const data = await response.text();
+        if(data == 'valid')
+            return true;
+        else
+            return false;
+    }
+    catch(error){
+        console.log("Error: ", error);
+        return false;
+    }
+}
+
 async function whatsappValidation(whatsapp) {
     const url = env.API_URL;
 
@@ -49,8 +65,26 @@ document.getElementById("user_name").addEventListener("blur", function () {
     user_name_error.textContent = " ";
 
     if (!user_name) {
-        user_name_error.textContent = "please write your name";
+        user_name_error.textContent = "Please write your name";
+        user_name_error.style.color = "red";
+        return;
     }
+    if (user_name.length < 4 || user_name.length > 20) {
+        user_name_error.textContent = "Username must be between 4 and 20 characters";
+        user_name_error.style.color = "red";
+        return;
+    }
+    userNameValidation(user_name).then((isValid) => {
+        if(isValid){
+            user_name_error.textContent = "Valid user name";
+            user_name_error.style.color = "green";
+        }
+        else{
+            user_name_error.textContent = "This user name is exist, please choose another username";
+            user_name_error.style.color = "red";
+        }
+    })
+
 })
 
 

@@ -45,5 +45,18 @@ class User {
 
     return false;
   }
+  
+  public function checkUserName($username) {
+    $query = "SELECT user_name FROM users WHERE user_name = ?";
+    $stmt = $this->conn->prepare($query);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    // print_r($result);
+    if ($result->num_rows === 1) {
+      return true;
+    }
+    return false;
+  }
 }
 ?>

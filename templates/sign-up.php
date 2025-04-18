@@ -1,8 +1,5 @@
 <?php
 
-
-require __DIR__ . '/../src/database.php'; 
-
 $errors = []; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
