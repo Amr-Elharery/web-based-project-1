@@ -106,6 +106,20 @@ function resetForm() {
     isImageValid = false;
 }
 
+document.getElementById("toggle_password").addEventListener("click", function () {
+    const passwordField = document.getElementById("password");
+    const confirmPasswordField = document.getElementById("confirm_password");
+    const type = passwordField.type === "password" ? "text" : "password";
+    passwordField.type = type;
+    confirmPasswordField.type = type;
+    if(type === "text") {
+        this.classList.remove("fa-eye-slash");
+        this.classList.add("fa-eye");
+    }else{
+        this.classList.add("fa-eye-slash");
+        this.classList.remove("fa-eye");
+    }
+});
 
 // VALIDATION EVENTS
 

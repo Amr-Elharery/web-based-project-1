@@ -41,9 +41,10 @@
             <span class="error-message fs-14" id="address_error"></span>
         </div>
 
-        <div class="form-group">
+        <div class="form-group password-group">
             <label for="password">Password<span class="c-red fs-14">*</span> : </label>
             <input class="form-control" type="password" id="password" name="password" placeholder="Enter your password" title="Must contain at least 8 characters, one number, and one special character">
+            <i class="fa-solid fa-eye-slash fs-14 c-gray" id="toggle_password"></i>
             <div class="password-requirements fs-14 c-grey">
                 Password must be at least 8 characters long and contain at least one number and one special character
             </div>

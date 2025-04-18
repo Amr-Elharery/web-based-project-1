@@ -27,3 +27,20 @@
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
+.password-group {
+  position: relative;
+}
+.password-group input[type="password"] {
+  padding-right: 40px;
+}
+.password-group #toggle_password {
+  position: absolute;
+  right: 10px;
+  top: 37%;
+  cursor: pointer;
+  color: #007bff;
+}
+.password-group #toggle_password:hover {
+  color: #0056b3;
+}
