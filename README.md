@@ -16,4 +16,4 @@
   ```
   2. Start MySQL service to connect.
   3. Open project folder.
-  4. run command `php -S localhost:8000` to serve the project locally.
+  4. run command `php -S localhost:8000` to serve the project locally OR `npm start`.
