@@ -12,7 +12,7 @@ class User {
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
   
     $stmt = $this->conn->prepare("
-      INSERT INTO users (full_name, user_name, email, phone, whatsapp, address, password, user_image)
+      INSERT INTO users (full_name, user_name, email, phone, whatsapp_number, address, password, user_image)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ");
   
@@ -20,7 +20,8 @@ class User {
   
     $stmt->bind_param("ssssssss", $full_name, $user_name, $email, $phone, $whatsapp, $address, $hashedPassword, $user_image);
   
-    return $stmt->execute();
+    $stmt->execute();
+    return true;
   }
   
 

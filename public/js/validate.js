@@ -1,5 +1,7 @@
 import { env } from '/config/env.js';
 
+let formValid = false;
+
 async function userNameValidation(username) {
     const url = "/src/validation/checkUserName.php";
     try{
@@ -39,12 +41,42 @@ async function whatsappValidation(whatsapp) {
         else if(response.status === 200 && result.status === 'invalid'){
             return false;
         }
+        else{
+            console.error('Error:', result);
+            return true; // TODO handle this case properly
+        }
     } catch (error) {
         console.error('Error:', error);
         return false;
     }
 }
 
+async function submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password){
+    const url = "/src/validation/register.php";
+    const user_image = document.getElementById("user_image").files[0];
+    const formData = new FormData();
+    formData.append("full_name", full_name);
+    formData.append("user_name", user_name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("whatsapp", whatsapp);
+    formData.append("address", address);
+    formData.append("password", password);
+    formData.append("confirm_password", confirm_password);
+    formData.append("user_image", user_image);
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: formData,
+        });
+        const data = await response.text();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
+    }
+}
 
 document.getElementById("full_name").addEventListener("blur", function () {
     const full_name = document.getElementById("full_name").value;
@@ -54,6 +86,12 @@ document.getElementById("full_name").addEventListener("blur", function () {
 
     if (!full_name) {
         full_name_error.textContent = "please write your full name";
+        formValid = false;
+        return;
+    }else{
+        full_name_error.textContent = "valid full name";
+        full_name_error.style.color = "green";
+        formValid = true;
     }
 })
 
@@ -78,10 +116,12 @@ document.getElementById("user_name").addEventListener("blur", function () {
         if(isValid){
             user_name_error.textContent = "Valid user name";
             user_name_error.style.color = "green";
+            formValid = true;
         }
         else{
             user_name_error.textContent = "This user name is exist, please choose another username";
             user_name_error.style.color = "red";
+            formValid = false;
         }
     })
 
@@ -96,6 +136,13 @@ document.getElementById("email").addEventListener("blur", function () {
 
     if (!email) {
         email_error.textContent = "please write your Email address";
+        email_error.style.color = "red";
+        formValid = false;
+        return;
+    }else{
+        email_error.textContent = "valid email address";
+        email_error.style.color = "green";
+        formValid = true;
     }
 })
 
@@ -107,6 +154,20 @@ document.getElementById("phone").addEventListener("blur", function () {
 
     if (!phone) {
         phone_error.textContent = "please write your phone number";
+        phone_error.style.color = "red";
+        formValid = false;
+        return;
+    }
+    if(/^01[0-2]\d{1,8}$/.test(+phone)) {
+        phone_error.textContent = "phone number must be 11 number in Egypt";
+        phone_error.style.color = "red";
+        formValid = false;
+        return;
+    }
+    else{
+        phone_error.textContent = "valid phone number";
+        phone_error.style.color = "green";
+        formValid = true;
     }
 })
 
@@ -119,26 +180,27 @@ document.getElementById("whatsapp").addEventListener("blur", function () {
 
     if (!whatsapp) {
         whatsapp_error.textContent = "please write your whatsapp number";
+        whatsapp_error.style.color = "red";
+        formValid = false;
+        return;
     }
-    if (whatsapp.length < 11) {
+    if(/^01[0-2]\d{1,8}$/.test(+whatsapp)) {
         whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
-        whatsapp_error.style.color = "red"
+        whatsapp_error.style.color = "red";
+        formValid = false;
+        return;
     }
-    if(/[0-9]{10,15}/.test(whatsapp)) {
-        whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
-        whatsapp_error.style.color = "red"
-    }
-    if (whatsapp.length === 11 && /[0-9]{10,15}/.test(whatsapp)) {
-        whatsappValidation(whatsapp).then(isValid => {
-            if (!isValid) {
-                whatsapp_error.textContent = "invalid whatsapp number";
-                whatsapp_error.style.color = "red"
-            } else {
-                whatsapp_error.textContent = "valid whatsapp number";
-                whatsapp_error.style.color = "green"
-            }
-        });
-    }
+    whatsappValidation(whatsapp).then(isValid => {
+        if (!isValid) {
+            whatsapp_error.textContent = "invalid whatsapp number";
+            whatsapp_error.style.color = "red";
+            formValid = false;
+        } else {
+            whatsapp_error.textContent = "valid whatsapp number";
+            whatsapp_error.style.color = "green";
+            formValid = true;
+        }
+    });
 })
 
 
@@ -150,6 +212,13 @@ document.getElementById("address").addEventListener("blur", function () {
 
     if (!address) {
         address_error.textContent = "please write your Address";
+        address_error.style.color = "red";
+        formValid = false;
+        return;
+    }else{
+        address_error.textContent = "valid Address";
+        address_error.style.color = "green";
+        formValid = true;
     }
 })
 
@@ -162,21 +231,28 @@ document.getElementById("password").addEventListener("input", function () {
     if (password.length < 8) {
         password_error.textContent = "password must be more than 8 characters"
         password_error.style.color = "red"
+        formValid = false;
+        return;
     }
 
     else if (!/\d/.test(password)) {
         password_error.textContent = "password must have at least 1 number"
         password_error.style.color = "red"
+        formValid = false;
+        return;
     }
 
     else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
         password_error.textContent = "password must have at least 1 special character"
-        password_error.style.color = "red"
+        password_error.style.color = "red";
+        formValid = false;
+        return;
     }
 
     else {
         password_error.textContent = "strong password"
         password_error.style.color = "green"
+        formValid = true;
     }
 })
 
@@ -187,11 +263,19 @@ document.getElementById("user_image").addEventListener("change", function () {
     user_image_error.textContent = " ";
 
     if (this.files.length == 0) {
-        user_image_error.textContent = "please choose your user image";
+        user_image_error.textContent = "Please choose your user image";
+        user_image_error.style.color = "red";
+        formValid = false;
+        return;
+    }else{
+        user_image_error.textContent = "File: " + this.files[0].name;
+        user_image_error.style.color = "green";
+        formValid = true;
     }
 })
 
 document.getElementById("registrationForm").addEventListener("submit", function (e) {
+    e.preventDefault();
 
     const full_name = document.getElementById("full_name").value;
     const user_name = document.getElementById("user_name").value;
@@ -206,17 +290,22 @@ document.getElementById("registrationForm").addEventListener("submit", function 
 
     confirm_password_error.textContent = "";
     if (password !== confirm_password) {
-        confirm_password_error.textContent = "password does not match";
-        e.preventDefault();
+        confirm_password_error.textContent = "Password does not match";
+        confirm_password_error.style.color = "red";
     }
 
-    else if (!full_name || !user_name || !email || !phone || !whatsapp || !address || !password || !confirm_password) {
-        form_error.textContent = "please fill in all the feilds";
-        e.preventDefault();
+    if(formValid){
+        submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password).then((result) => {
+            if (result == 'success') {
+                form_error.textContent = "Registration successful!";
+                form_error.style.color = "green";
+            } else {
+                form_error.textContent = "Registration failed! Please try again.<br>" + result;
+                form_error.style.color = "red";
+            }
+        })
+    }else{
+        form_error.textContent = "Please fill in all the feilds";
+        form_error.style.color = "red";
     }
-})
-
-
-
-
-
+});
