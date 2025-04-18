@@ -1,19 +1,22 @@
 import { env } from '/config/env.js';
 
-let formValid = false;
-let limit_exceeded = false; // Flag to track if API limit is exceeded
+let isFullNameValid = false;
+let isUserNameValid = false;
+let isEmailValid = false;
+let isPhoneValid = false;
+let isWhatsappValid = false;
+let isAddressValid = false;
+let isPasswordValid = false;
+let isImageValid = false;
+let limit_exceeded = false;
 
 async function userNameValidation(username) {
     const url = "/src/validation/checkUserName.php";
-    try{
+    try {
         const response = await fetch(url + "?username=" + username);
         const data = await response.text();
-        if(data == 'valid')
-            return true;
-        else
-            return false;
-    }
-    catch(error){
+        return data === 'valid';
+    } catch (error) {
         console.log("Error: ", error);
         return false;
     }
@@ -29,20 +32,16 @@ async function whatsappValidation(whatsapp) {
             'x-rapidapi-host': env['x-rapidapi-host'],
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            phone_number: '+2' + whatsapp,
-        })
+        body: JSON.stringify({ phone_number: '+2' + whatsapp })
     };
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        if(response.status === 200 && result.status === 'valid'){
+        if (response.status === 200 && result.status === 'valid') {
             return true;
-        }
-        else if(response.status === 200 && result.status === 'invalid'){
+        } else if (response.status === 200 && result.status === 'invalid') {
             return false;
-        }
-        else{
+        } else {
             console.error('Error:', result);
             limit_exceeded = true;
             return false;
@@ -53,7 +52,7 @@ async function whatsappValidation(whatsapp) {
     }
 }
 
-async function submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password){
+async function submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password) {
     const url = "/src/validation/register.php";
     const user_image = document.getElementById("user_image").files[0];
     const formData = new FormData();
@@ -80,207 +79,186 @@ async function submitForm(full_name, user_name, email, phone, whatsapp, address,
     }
 }
 
-document.getElementById("full_name").addEventListener("blur", function () {
-    const full_name = document.getElementById("full_name").value;
-    const full_name_error = document.getElementById("full_name_error");
+// VALIDATION EVENTS
 
-    full_name_error.textContent = " ";
+document.getElementById("full_name").addEventListener("blur", function () {
+    const full_name = this.value;
+    const full_name_error = document.getElementById("full_name_error");
+    full_name_error.textContent = "";
 
     if (!full_name) {
         full_name_error.textContent = "please write your full name";
-        formValid = false;
-        return;
-    }else{
+        full_name_error.style.color = "red";
+        isFullNameValid = false;
+    } else {
         full_name_error.textContent = "valid full name";
         full_name_error.style.color = "green";
-        formValid = true;
+        isFullNameValid = true;
     }
-})
-
+});
 
 document.getElementById("user_name").addEventListener("blur", function () {
-    const user_name = document.getElementById("user_name").value;
+    const user_name = this.value;
     const user_name_error = document.getElementById("user_name_error");
 
-    user_name_error.textContent = " ";
+    user_name_error.textContent = "";
 
     if (!user_name) {
         user_name_error.textContent = "Please write your name";
         user_name_error.style.color = "red";
+        isUserNameValid = false;
         return;
     }
     if (user_name.length < 4 || user_name.length > 20) {
         user_name_error.textContent = "Username must be between 4 and 20 characters";
         user_name_error.style.color = "red";
+        isUserNameValid = false;
         return;
     }
-    userNameValidation(user_name).then((isValid) => {
-        if(isValid){
+
+    userNameValidation(user_name).then(isValid => {
+        if (isValid) {
             user_name_error.textContent = "Valid user name";
             user_name_error.style.color = "green";
-            formValid = true;
-        }
-        else{
-            user_name_error.textContent = "This user name is exist, please choose another username";
+            isUserNameValid = true;
+        } else {
+            user_name_error.textContent = "This user name is taken, choose another";
             user_name_error.style.color = "red";
-            formValid = false;
+            isUserNameValid = false;
         }
-    })
-
-})
-
+    });
+});
 
 document.getElementById("email").addEventListener("blur", function () {
-    const email = document.getElementById("email").value;
+    const email = this.value;
     const email_error = document.getElementById("email_error");
-
-    email_error.textContent = " ";
+    email_error.textContent = "";
 
     if (!email) {
         email_error.textContent = "please write your Email address";
         email_error.style.color = "red";
-        formValid = false;
-        return;
-    }else{
+        isEmailValid = false;
+    } else {
         email_error.textContent = "valid email address";
         email_error.style.color = "green";
-        formValid = true;
+        isEmailValid = true;
     }
-})
+});
 
 document.getElementById("phone").addEventListener("blur", function () {
-    const phone = document.getElementById("phone").value;
+    const phone = this.value;
     const phone_error = document.getElementById("phone_error");
-
-    phone_error.textContent = " ";
+    phone_error.textContent = "";
 
     if (!phone) {
         phone_error.textContent = "please write your phone number";
         phone_error.style.color = "red";
-        formValid = false;
+        isPhoneValid = false;
         return;
     }
-    if(/^01[0-2]\d{1,8}$/.test(+phone)) {
-        phone_error.textContent = "phone number must be 11 number in Egypt";
+    if (!/^01[0-2]\d{8}$/.test(phone)) {
+        phone_error.textContent = "phone number must be 11 digits in Egypt";
         phone_error.style.color = "red";
-        formValid = false;
-        return;
-    }
-    else{
+        isPhoneValid = false;
+    } else {
         phone_error.textContent = "valid phone number";
         phone_error.style.color = "green";
-        formValid = true;
+        isPhoneValid = true;
     }
-})
-
+});
 
 document.getElementById("whatsapp").addEventListener("blur", function () {
-    const whatsapp = document.getElementById("whatsapp").value;
+    const whatsapp = this.value;
     const whatsapp_error = document.getElementById("whatsapp_error");
 
-    whatsapp_error.textContent = " ";
+    whatsapp_error.textContent = "";
 
     if (!whatsapp) {
         whatsapp_error.textContent = "please write your whatsapp number";
         whatsapp_error.style.color = "red";
-        formValid = false;
+        isWhatsappValid = false;
         return;
     }
-    if(/^01[0-2]\d{1,8}$/.test(+whatsapp)) {
-        whatsapp_error.textContent = "whatsapp number must be 11 number in Egypt";
+    if (!/^01[0-2]\d{8}$/.test(whatsapp)) {
+        whatsapp_error.textContent = "whatsapp number must be 11 digits in Egypt";
         whatsapp_error.style.color = "red";
-        formValid = false;
+        isWhatsappValid = false;
         return;
     }
+
     whatsappValidation(whatsapp).then(isValid => {
         if (!isValid) {
-            if(limit_exceeded){
-                whatsapp_error.textContent = "API calls limit exceeded, please try again later";
+            if (limit_exceeded) {
+                whatsapp_error.textContent = "API limit exceeded. Continue anyway.";
+                whatsapp_error.style.color = "orange";
+                isWhatsappValid = true;
+            } else {
+                whatsapp_error.textContent = "Invalid whatsapp number";
                 whatsapp_error.style.color = "red";
-                formValid = true; // Allow form submission if limit exceeded
-            }else{
-                whatsapp_error.textContent = "invalid whatsapp number";
-                whatsapp_error.style.color = "red";
-                formValid = false;
+                isWhatsappValid = false;
             }
         } else {
             whatsapp_error.textContent = "valid whatsapp number";
             whatsapp_error.style.color = "green";
-            formValid = true;
+            isWhatsappValid = true;
         }
     });
-})
-
+});
 
 document.getElementById("address").addEventListener("blur", function () {
-    const address = document.getElementById("address").value;
+    const address = this.value;
     const address_error = document.getElementById("address_error");
-
-    address_error.textContent = " ";
+    address_error.textContent = "";
 
     if (!address) {
         address_error.textContent = "please write your Address";
         address_error.style.color = "red";
-        formValid = false;
-        return;
-    }else{
+        isAddressValid = false;
+    } else {
         address_error.textContent = "valid Address";
         address_error.style.color = "green";
-        formValid = true;
+        isAddressValid = true;
     }
-})
+});
 
 document.getElementById("password").addEventListener("input", function () {
-    const password = document.getElementById("password").value;
+    const password = this.value;
     const password_error = document.getElementById("password_error");
-
     password_error.textContent = "";
 
     if (password.length < 8) {
-        password_error.textContent = "password must be more than 8 characters"
-        password_error.style.color = "red"
-        formValid = false;
-        return;
-    }
-
-    else if (!/\d/.test(password)) {
-        password_error.textContent = "password must have at least 1 number"
-        password_error.style.color = "red"
-        formValid = false;
-        return;
-    }
-
-    else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-        password_error.textContent = "password must have at least 1 special character"
+        password_error.textContent = "password must be more than 8 characters";
         password_error.style.color = "red";
-        formValid = false;
-        return;
+        isPasswordValid = false;
+    } else if (!/\d/.test(password)) {
+        password_error.textContent = "password must have at least 1 number";
+        password_error.style.color = "red";
+        isPasswordValid = false;
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        password_error.textContent = "password must have at least 1 special character";
+        password_error.style.color = "red";
+        isPasswordValid = false;
+    } else {
+        password_error.textContent = "strong password";
+        password_error.style.color = "green";
+        isPasswordValid = true;
     }
-
-    else {
-        password_error.textContent = "strong password"
-        password_error.style.color = "green"
-        formValid = true;
-    }
-})
+});
 
 document.getElementById("user_image").addEventListener("change", function () {
-    const user_image = document.getElementById("user_image").value;
     const user_image_error = document.getElementById("user_image_error");
+    user_image_error.textContent = "";
 
-    user_image_error.textContent = " ";
-
-    if (this.files.length == 0) {
+    if (this.files.length === 0) {
         user_image_error.textContent = "Please choose your user image";
         user_image_error.style.color = "red";
-        formValid = false;
-        return;
-    }else{
+        isImageValid = false;
+    } else {
         user_image_error.textContent = "File: " + this.files[0].name;
         user_image_error.style.color = "green";
-        formValid = true;
+        isImageValid = true;
     }
-})
+});
 
 document.getElementById("registrationForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -293,6 +271,7 @@ document.getElementById("registrationForm").addEventListener("submit", function 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const confirm_password = document.getElementById("confirm_password").value;
+
     const confirm_password_error = document.getElementById("confirm_password_error");
     const form_error = document.getElementById("form_error");
 
@@ -300,31 +279,35 @@ document.getElementById("registrationForm").addEventListener("submit", function 
     if (password !== confirm_password) {
         confirm_password_error.textContent = "Password does not match";
         confirm_password_error.style.color = "red";
+        return;
     }
 
-    if(formValid){
-        submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password).then((result) => {
-            if (result == 'success') {
-                form_error.textContent = "Registration successful!";
-                form_error.style.color = "green";
-                Swal.fire({
-                    title: "Registration successful!",
-                    icon: "success",
-                    draggable: true
-                });
-            } else {
-                form_error.textContent = "Registration failed! Please try again.<br>" + result;
-                form_error.style.color = "red";
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Registration failed! Please try again.",
-                    footer: '<a href="/">Register again?</a>'
-                });
-            }
-        })
-    }else{
-        form_error.textContent = "Please fill in all the feilds";
+    const allValid = isFullNameValid && isUserNameValid && isEmailValid && isPhoneValid &&
+        isWhatsappValid && isAddressValid && isPasswordValid && isImageValid;
+
+    if (allValid) {
+        submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password)
+            .then(result => {
+                if (result === 'success') {
+                    form_error.textContent = "Registration successful!";
+                    form_error.style.color = "green";
+                    Swal.fire({
+                        title: "Registration successful!",
+                        icon: "success"
+                    });
+                } else {
+                    form_error.textContent = "Registration failed! " + result;
+                    form_error.style.color = "red";
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Registration failed! Please try again.",
+                        footer: '<a href="/">Register again?</a>'
+                    });
+                }
+            });
+    } else {
+        form_error.textContent = "Please fill in all the fields correctly.";
         form_error.style.color = "red";
     }
 });
