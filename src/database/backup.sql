@@ -36,7 +36,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'mohamed tamer','mohamed','01123435870','01123435870','October','midoelharery@mai.coms','$2y$10$MA8WcEb0NseRLCQZnwaHkOF5ccTPLoZn7b3zMUyuPhA1TdB/QqAmq','/uploads/68029b4c63a06_IMG_20160225_125831.jpg','2025-04-18 18:34:52'),(3,'mohamed tamer','mohamed_1','01123435870','01123435870','Fardous','midoelharery@mai.com','$2y$10$Zh4jfXOdemLyvaS7ikv5neGbhLTNE2B9XsmySkgkUVXBqZN7MF.FK','/uploads/68029fef4e636_4.jpg','2025-04-18 18:54:39'),(4,'mohamed tamer','mohamed_2','01123435870','01123435870','Fardous','midoelharery@mail.com','$2y$10$Q6CbaIgftSgcWJ3Q6BCdDuMi.WTTvLVEieUUdCeTlBTaEPYGR91ca','/uploads/6802a0ce5d6c8_4.jpg','2025-04-18 18:58:22'),(5,'Amr Elharery','amrmero','01126469477','01126469477','October','amrelharery@gmail.com','$2y$10$aOGIdokWEdYtKMNL8JfAU.eqLk9EOI9v5O7p.ExfV9dyk/IOE44lW','/uploads/6802a0ffd537c_20141226_213618.jpg','2025-04-18 18:59:11'),(6,'Amr Elharery','amrmero_1','01126469477','01126469477','October','amrelharery@gmail.ca','$2y$10$RRUWMouvw855BRiy97sER.Sit2mIZJdWJ88s4.AR36to3uT8t9FLu','/uploads/6802a13b4f073_20141226_213618.jpg','2025-04-18 19:00:11');
+INSERT INTO `users` VALUES (1,'admin','admin_1','01111111111','01111111111','Address','admin-1@example.com','$2y$10$TwH/IwgDC6VdBa.QrO4ba.xv60O1Ad6TaLrU7pBSPIxAPcpRPdpUu','/uploads/6802b2ff468ae_default.png','2025-04-18 20:15:59'),(2,'admin','admin_2','01111111111','01111111111','Address','admin-2@example.com','$2y$10$/alGrkGuZaG/6XIU/sdlP.Z5rERmy5sj7.0brYygep105UtLCgNsS','/uploads/6802b30749c84_default.png','2025-04-18 20:16:07'),(3,'admin','admin_3','01111111111','01111111111','Address','admin-3@example.com','$2y$10$L1M/avFlA3Fu7ScBCwB6vOTzcue3K3IhIBwIfIAyvrNA5FbEDK0D6','/uploads/6802b30fb2fc8_default.png','2025-04-18 20:16:15'),(4,'admin','admin_4','01111111111','01111111111','Address','admin-4@example.com','$2y$10$OnFpoAvPTlfgUXMbTAUxaupVCOfVPwiVUkHMIp/wtXSXwBDrGHSq6','/uploads/6802b31843157_default.png','2025-04-18 20:16:24'),(5,'admin','admin_5','01111111111','01111111111','Address','admin-5@example.com','$2y$10$aaIVo/LcodBkQTmyXEiRlu7NfdeHJcRDNf0zeYygice7f1ViuRQjq','/uploads/6802b320c180f_default.png','2025-04-18 20:16:32');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-18 21:17:47
+-- Dump completed on 2025-04-18 22:18:07
