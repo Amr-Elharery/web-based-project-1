@@ -13,7 +13,7 @@ let limit_exceeded = false;
 
 // ASYNC FUNCTIONS
 async function userNameValidation(username) {
-    const url = "/src/validation/checkUserName.php";
+    const url = "/src/api/checkUserName.php";
     try {
         const response = await fetch(url + "?username=" + username);
         const data = await response.text();
@@ -55,7 +55,7 @@ async function whatsappValidation(whatsapp) {
 }
 
 async function submitForm(full_name, user_name, email, phone, whatsapp, address, password, confirm_password) {
-    const url = "/src/validation/register.php";
+    const url = "/src/api/register.php";
     const user_image = document.getElementById("user_image").files[0];
     const formData = new FormData();
     formData.append("full_name", full_name);

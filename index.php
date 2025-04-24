@@ -16,9 +16,9 @@
       $connection = Database::getInstance();
       echo "<script>console.log('Connected successfully to DB server')</script>"; // Test connection
     ?>
-  <?php include __DIR__ . '/templates/layout/header.php'; ?>
-  <?php include __DIR__ . '/templates/sign-up.php'; ?>
-  <?php include __DIR__ . '/templates/layout/footer.php'; ?>
+  <?php include __DIR__ . '/views/layout/header.php'; ?>
+  <?php include __DIR__ . '/views/sign-up.php'; ?>
+  <?php include __DIR__ . '/views/layout/footer.php'; ?>
 
   <script src="./public/js/header.js"></script>
   <script src="./public/js/validate.js" type="module"></script>
